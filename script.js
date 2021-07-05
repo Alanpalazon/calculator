@@ -105,26 +105,28 @@ document.getElementById('clear-txt').addEventListener('click', function(){
 //BACKSPACE FUNCTIONALITY
 
 document.getElementById('backspace-txt').addEventListener('click', function(){
-    if(currentNum.length != 1){
-        currentNum = currentNum.slice(0,currentNum.length-1);
-        console.log(currentNum);
-        display2.textContent = currentNum;
+    if(currentNum.length > 1){
+
+        if(currentNum.length == 2 && currentNum[0] == "-"){
+            currentNum = "0";
+            console.log(currentNum);
+            display2.textContent = currentNum;
+        }
+
+        else{
+            currentNum = currentNum.slice(0,currentNum.length-1);
+            console.log(currentNum);
+            display2.textContent = currentNum;
+        }
+    }
+    
+    else if(currentNum.length == 1){
+            currentNum = "0";
+            console.log(currentNum);
+            display2.textContent = currentNum;
     }
 
-    else if(currentNum.length == 2 && currentNum.includes("-")){
-        currentNum = "0";
-        console.log(currentNum);
-        display2.textContent = currentNum;
-    }
-
-
-    else{
-        currentNum = "0";
-        console.log(currentNum);
-        display2.textContent = currentNum;
-    }
 });
-
 
 //END
 
