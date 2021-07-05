@@ -10,79 +10,81 @@
     <main>
         <div class ="calc-container" id = "calc-container">
             <div id = "calc-content">
-                <div id = "calc-display"></div> <!--will probs need to turn into container for inner-display boxes-->
+                <div id = "calc-display">
+                    <!--display-child-1 shows current caluclations before user presses equals-->
+                    <div class = "display-child" id = "display-child-1"></div>
+                      <!--display-child-2 shows text content of current clicked button and then final answer when user clicks equals-->
+                    <div class = "display-child" id = "display-child-2"></div>
+                </div>
                 <div id = "backspace-container">
                     <div id = "name-div"><p id = "name-div-p">CALCUL8TR</p></div>
-                    <button id = "backspace-button"><img id = "backspace-img" src="images/backspace.png" alt="An image of a backspace button"></button>
                 </div>
                 <div class = "button-container" id = "button-container"> 
                     <div class = "button" id = "clear">
-                        <button class = "btn-text" id = "clear-txt">AC</button>
+                        <button class = "btn-text" id = "clear-txt">C</button>
                     </div>
                     <div class = "button" id = "brackets">
-                        <button class = "btn-text" id = "brackets-txt">()</button>
+                        <button class = "btn-text" id = "backspace-txt"><img id = "backspace-img" src="images/backspace.png" alt="An image of a backspace button"></button>
                     </div>
                     <div class = "button" id = "modulo">
-                        <button class = "btn-text" id = "modulo-txt">%</button>
+                        <button class = "btn-text operator" id = "modulo-txt">%</button>
                     </div>
                     <div class = "button" id = "divide">
-                        <button class = "btn-text" id = "divide-txt">&#247;</button>
+                        <button class = "btn-text operator" id = "divide-txt">&#247;</button>
                     </div>
                     <div class = "button" id = "7">
-                        <button class = "btn-text" id = "7-txt">7</button>
+                        <button class = "btn-text number" id = "7-txt">7</button>
                     </div>
                     <div class = "button" id = "8">
-                        <button class = "btn-text" id = "eih=ght-txt">8</button>
+                        <button class = "btn-text number" id = "8-txt">8</button>
                     </div>
                     <div class = "button" id = "9">
-                        <button class = "btn-text" id = "9-txt">9</button>
+                        <button class = "btn-text number" id = "9-txt">9</button>
                     </div>
                     <div class = "button" id = "multiply">
-                        <button class = "btn-text" id = "multiply-txt">x</button>
+                        <button class = "btn-text operator" id = "multiply-txt">x</button>
                     </div>
                     <div class = "button" id = "4">
-                        <button class = "btn-text" id = "4-txt">4</button>
+                        <button class = "btn-text number" id = "4-txt">4</button>
                     </div>
                     <div class = "button" id = "5">
-                        <button class = "btn-text" id = "5-txt">5</button>
+                        <button class = "btn-text number" id = "5-txt">5</button>
                     </div>
                     <div class = "button" id = "6">
-                        <button class = "btn-text" id = "6-txt">6</button>
+                        <button class = "btn-text number" id = "6-txt">6</button>
                     </div>
                     <div class = "button" id = "minus">
-                        <button class = "btn-text" id = "minus-txt">-</button>
+                        <button class = "btn-text operator" id = "minus-txt">-</button>
                     </div>
                     <div class = "button" id = "1">
-                        <button class = "btn-text" id = "1-txt">1</button>
+                        <button class = "btn-text number" id = "1-txt">1</button>
                     </div>
                     <div class = "button" id = "2">
-                        <button class = "btn-text" id = "2-txt">2</button>
+                        <button class = "btn-text number" id = "2-txt">2</button>
                     </div>
                     <div class = "button" id = "3">
-                        <button class = "btn-text" id = "3-txt">3</button>
+                        <button class = "btn-text number" id = "3-txt">3</button>
                     </div>
                     <div class = "button" id = "add">
-                        <button class = "btn-text" id = "add-txt">+</button>
+                        <button class = "btn-text operator" id = "add-txt">+</button>
                     </div>
                     <div class = "button" id = "plus-minus">
                         <button class = "btn-text" id = "plus-minus-txt">+/-</button>
                     </div>
                     <div class = "button" id = "0">
-                        <button class = "btn-text" id = "0-txt">0</button>
+                        <button class = "btn-text number" id = "0-txt">0</button>
                     </div>
                     <div class = "button" id = "decimal">
                         <button class = "btn-text" id = "decimal-txt">.</button>
                     </div>
                     <div class = "button" id = "equals">
-                        <button class = "btn-text" id = "equals-txt">=</button>
+                        <button class = "btn-text operator" id = "equals-txt">=</button>
                     </div>
                 </div>
             </div>
            
         </div>
     </main>
-
-
     <script src="script.js"></script>
 </body>
 </html>

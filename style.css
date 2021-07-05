@@ -56,12 +56,21 @@ main{
 }
 
 #calc-display{
-    /* border: 1px solid #ff6ec7; */
+    border: 1px solid #ff6ec7;
     color: white;
     height: 25%;
     width: 97%;
     margin: 2% 1% 0 1%;
     background-color: transparent;
+    display: flex;
+    flex-direction: column;
+}
+
+.display-child{
+    width: 99%;
+    height: 47%;
+    border: 1px solid blue;
+    margin: 2px;
 }
 
 #backspace-container{
@@ -69,7 +78,7 @@ main{
     width: 100%;
     height: 8%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 #name-div{
@@ -88,22 +97,6 @@ main{
     -webkit-text-fill-color: transparent;
 }
 
-#backspace-button{
-    background-color: transparent;
-    border: none;
-    height: 80%;
-    width: 20%;
-    align-self: center;
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 7%;
-}
-
-#backspace-img{
-    height: 120%;
-    width: 80%;
-    align-self: center;
-}
 
 #button-container{
     border-top: 1px solid #ff6ec7;
@@ -142,6 +135,10 @@ main{
     padding-bottom: 10px;
 }
 
+#backspace-img{
+    width: 80%;
+}
+
 /* end */
 
 /* hover styles*/
@@ -157,11 +154,8 @@ main{
      color: #212121;
 }
 
-#AC-btn:hover{
-    color: rgba(255, 110, 199); 
-}
 
-#AC-btn:hover, #backspace-img:hover{
+#backspace-img:hover{
     transform: scale(1.2);
     transition-duration: 0.15s;
 }
