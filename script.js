@@ -1,136 +1,150 @@
+let currentNum;
+let totalNum;
+let storedNums;
+let calcs = [];
 const display1 = document.getElementById('display-child-1');
 const display2 = document.getElementById('display-child-2');
-//current number being calcualted. append to text content when numbers clicked 
-let calculations = []; //either use loop to convert all items to num or convert when operator button clicked, before pushing to this array
-let currentNum = "0";
+display2.textContent = "0";
 
-display2.textContent = currentNum;
+//all maths functions need to round long decimal number: find out how to do this. 
+function modulus(a,b){ return a%b;} 
+function add(a,b){ return a+b;}
+function subtract(a,b){ return a-b;}
+function multiply(a,b){ return a*b;} 
+function divide(a,b){ 
+    if(b == 0) { setTimeout(function(){ display2.textContent = "nice try";}, 3000); display2.textContent = "0"}
+    else{ return a/b;}
+}
 
 
-//NUMBER, DECIMAL AND PLUS/MINUS BUTTON FUNCTIONALITY
-
-
-//only call this function on number buttons, +/= button and decimal point button 
 function numberClick(e){
-    if(e.target.classList.contains("number")){
-        if(currentNum == "0"){ //change 0 to num clicked
-            currentNum = e.target.textContent; 
-            console.log(currentNum);
-            display2.textContent = currentNum; 
-            return; } 
-        else { //if current num not 0 then concat
-            currentNum += e.target.textContent; 
-            console.log(currentNum); 
-            display2.textContent = currentNum; 
-            return; 
-        }  
-    }
-
-    if(e.target.id == "decimal-txt" && !currentNum.includes(".")){//add decimal point
-        currentNum += "."; 
-        console.log(currentNum);
-        display2.textContent = currentNum; 
-        return;
+    if(display2.textContent != calcs[calcs.length-2]){
+        if(display2.textContent.length == 1 && display2.textContent == "0"){display2.textContent = e.target.textContent; return;}
+        else{display2.textContent += e.target.textContent; return;}
     } 
 
-    if(e.target.id == "plus-minus-txt" && currentNum != "0"){
-        if(!currentNum.includes("-")){ //make currentnNum negative 
-            let currentNumNeg = "-" + currentNum;
-            currentNum = currentNumNeg;
-            console.log(currentNum);
-            display2.textContent = currentNum; 
-            return;} 
-        else {//make currentNum positive 
-            currentNum = currentNum.slice(1, currentNum.length);
-            display2.textContent = currentNum; 
-            console.log(currentNum);
+    else{//append ".", replace length-2 with 0 then slice to return last 2 chjaracter SORT!!!!!
+        if(e.target.id == "decimal-txt"){ display2.textContent = "0."; return;}
+        else{display2.textContent = e.target.textContent; return;}
+    }
+
+}
+
+function decimalClick(e){
+    if(!display2.textContent.includes(".")){
+        if(display2.textContent.length == 0){display2.textContent = "0."}
+        else{display2.textContent += e.target.textContent}
+    }
+}
+
+function clear(){display2.textContent = "0"; storedNum = 0; calcs = [];}
+
+function backspace(){
+    if(display2.textContent.length == 1){display2.textContent = "0";}
+    else{
+        display2.textContent = display2.textContent.slice(0, display2.textContent.length-1);
+    }
+}
+function plusMinus(e){
+    if(display2.textContent != "0"){
+        if(display2.textContent.includes("-")){display2.textContent = display2.textContent.slice(1, display2.textContent.length);}
+        else{let display2Text = display2.textContent; display2.textContent = "-" + display2Text; }
+    }
+}
+
+function parseNum(){
+    if(display2.textContent.includes(".")){storedNum = parseFloat(display2.textContent); return storedNum;}
+    else{ storedNum = parseInt(display2.textContent); return storedNum;}
+}
+
+
+function operatorClick(e){ 
+//first operator click
+    if(calcs.length < 2){ //first numbeer 
+        calcs.push(parseNum()); //first num saved 
+        calcs.push(e.target.textContent); //first num stored in array
+        storedNum = 0;//set to 0 ready for next number 
+        display2.textContent = "0";//display to show 0 
+        console.log(calcs) // show first num  
+    }
+//second and onward clicks   
+    // else if(calcs.length >= 5 && display2.textContent == calcs[calcs.length-2]){
+    //     calcs.pop();
+    //     calcs.push(e.target.textContent);
+    //     console.log(calcs);
+    // }
+
+    else if(calcs.length >= 2){
+            if(calcs[calcs.length-1] == "x"){ 
+                calcs.push(parseNum()); 
+                calcs.push(multiply(calcs[calcs.length-3], calcs[calcs.length-1]));
+           
+            }
+            if(calcs[calcs.length-1] == "/"){ 
+                calcs.push(parseNum());  
+                calcs.push(divide(calcs[calcs.length-3],calcs[calcs.length-1]));
+              
+            }
+            if(calcs[calcs.length-1] == "%"){  
+                calcs.push(parseNum()); 
+                calcs.push(modulus(calcs[calcs.length-3], calcs[calcs.length-1]));
+            
+            }
+            if(calcs[calcs.length-1] == "+"){ 
+                calcs.push(parseNum());  
+                calcs.push(add(calcs[calcs.length-3], calcs[calcs.length-1]));
+                
+            }
+            if(calcs[calcs.length-1] == "-"){ 
+                calcs.push(parseNum());  
+                calcs.push(subtract(calcs[calcs.length-3], calcs[calcs.length-1]));
+                
+            }
+            calcs.push(e.target.textContent); 
+            display2.textContent = calcs[calcs.length-2]; 
+            console.log(calcs)
             return;
-        } 
     }
-   
-}
-
-document.querySelectorAll('.number').forEach(number => number.addEventListener('click', numberClick));
-document.getElementById('decimal-txt').addEventListener('click', numberClick);
-document.getElementById('plus-minus-txt').addEventListener('click', numberClick);
-
-//END
-
-
-//OPERATOR BUTTONS FUNCTIONALITY
-
-function operatorClick(e){
-    //for all operators push current num to calculations array
-    if(e.target.classList.includes("operator") && currentNum != "0"){
-
-    }
-
-    //for indivdual buttons append respective text contnt to displaychild1 
-
-    if(e.target.id = "modulo-txt"){
-        //call modulo function 
-    }
-
-    if(e.target.id = "divide-txt"){
-        //call divide function 
-    }
-
-    if(e.target.id = "multiply-txt"){
-        //call multiply function 
-    }
-
-    if(e.target.id = "minus-txt"){
-        //call minus function 
-    }
-
-    if(e.target.id = "add-txt"){
-        //call add function 
-    }
+       
 }
 
 
-//END
+function equals(){
+  
+    if(calcs.length >=2){
+        if(calcs[calcs.length-1] == "+"){ 
+            calcs.push(parseNum());
+            calcs.push(add(calcs[calcs.length-3], calcs[calcs.length-1]));
+         }
+         if(calcs[calcs.length-1] == "-"){ 
+            calcs.push(parseNum());
+            calcs.push(minus(calcs[calcs.length-3], calcs[calcs.length-1]));
+         }
+         if(calcs[calcs.length-1] == "/"){ 
+            calcs.push(parseNum());
+            calcs.push(divide(calcs[calcs.length-3], calcs[calcs.length-1]));
+         }
+         if(calcs[calcs.length-1] == "x"){ 
+            calcs.push(parseNum());
+            calcs.push(multiply(calcs[calcs.length-3], calcs[calcs.length-1]));
+         }
+         if(calcs[calcs.length-1] == "%"){ 
+            calcs.push(parseNum());
+            calcs.push(modulus(calcs[calcs.length-3], calcs[calcs.length-1]));
+         }
 
-//CLEAR FUNCTIONALITY
-
-document.getElementById('clear-txt').addEventListener('click', function(){
-    calculations = [];
-    currentNum = 0;
-    console.log(currentNum);
-    display2.textContent = currentNum;
-});
-
-//END
-
-//BACKSPACE FUNCTIONALITY
-
-document.getElementById('backspace-txt').addEventListener('click', function(){
-    if(currentNum.length > 1){
-
-        if(currentNum.length == 2 && currentNum[0] == "-"){
-            currentNum = "0";
-            console.log(currentNum);
-            display2.textContent = currentNum;
-        }
-
-        else{
-            currentNum = currentNum.slice(0,currentNum.length-1);
-            console.log(currentNum);
-            display2.textContent = currentNum;
-        }
-    }
+         display2.textContent = String(calcs[calcs.length-1]);
+         console.log(calcs);
+         return
     
-    else if(currentNum.length == 1){
-            currentNum = "0";
-            console.log(currentNum);
-            display2.textContent = currentNum;
     }
-
-});
-
-//END
+}
 
 
-
-
-
+document.getElementById("equals-txt").addEventListener('click', equals);
+document.querySelectorAll('.operator').forEach(operator => operator.addEventListener('click', operatorClick));
+document.getElementById("plus-minus-txt").addEventListener('click', plusMinus);
+document.getElementById("backspace-txt").addEventListener('click', backspace);
+document.getElementById("decimal-txt").addEventListener('click', decimalClick);
+document.getElementById("clear-txt").addEventListener('click', clear);
+document.querySelectorAll('.number').forEach(number => number.addEventListener('click', numberClick));

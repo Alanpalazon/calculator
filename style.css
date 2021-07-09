@@ -73,6 +73,10 @@ main{
     margin: 2px;
 }
 
+/* #display-child-1{
+    text-align: right;
+} */
+
 #backspace-container{
     border: none;
     width: 100%;
