@@ -56,7 +56,6 @@ main{
 }
 
 #calc-display{
-    border: 1px solid #ff6ec7;
     color: white;
     height: 25%;
     width: 97%;
@@ -69,13 +68,15 @@ main{
 .display-child{
     width: 99%;
     height: 47%;
-    border: 1px solid blue;
     margin: 2px;
 }
 
-/* #display-child-1{
+#display-child-2{
     text-align: right;
-} */
+    font-size: x-large;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    
+}
 
 #backspace-container{
     border: none;
