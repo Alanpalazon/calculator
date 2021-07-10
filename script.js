@@ -94,6 +94,7 @@ function parseNum(){
     }
 }
 
+
 function operatorClick(e){
     if(calcs.length < 2){ 
         calcs.push(parseNum());
@@ -101,6 +102,7 @@ function operatorClick(e){
         storedNum = 0;
         display2.textContent = "0"; 
         console.log(calcs)
+        display1.textContent += `${calcs[calcs.length-2]} ${calcs[calcs.length-1]}`;
         lastClicked = e.target.classList; 
         return;
     }
@@ -109,7 +111,9 @@ function operatorClick(e){
             if(lastClicked.contains("operator")){
                 calcs.pop();
                 calcs.push(e.target.textContent);
-                console.log(calcs);
+                display1.textContent = display1.textContent.slice(0, -1);
+                display1.textContent += e.target.textContent;
+                console.log(calcs.length);
                 return;
             }
             else if(!lastClicked.contains("operator")){
@@ -135,6 +139,8 @@ function operatorClick(e){
                 }
                 calcs.push(e.target.textContent); 
                 display2.textContent = calcs[calcs.length-2]; 
+                // display1.textContent = "";
+                display1.textContent = ` ${calcs[calcs.length-2]} ${calcs[calcs.length-1]}`;
                 console.log(calcs)
                 lastClicked = e.target.classList;
                 return;
@@ -166,6 +172,7 @@ function equals(e){
             calcs.push(modulus(calcs[calcs.length-3], calcs[calcs.length-1]));
          }
          display2.textContent = String(calcs[calcs.length-1]);
+         display1.textContent = `${calcs[calcs.length-1]} `;
          console.log(calcs);
          return
     }
